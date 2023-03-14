@@ -54,7 +54,8 @@ def get_image_url_list(info: dict, safe_download: bool) -> list:
     img_url_list = []
     while current_page <= int(info["preview_page"]):
         json_data = get_next_pages(info, current_page)
-        for value in json_data["data"].values():
+        for key in sorted(json_data["data"].keys()):
+            value = json_data["data"][key]
             if value == '':
                 if retry == 0:
                     print("Cannot get correct response, too many fails.")
